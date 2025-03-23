@@ -1,0 +1,102 @@
+<!DOCTYPE html>  
+<html lang="vi">  
+<head>  
+    <meta charset="UTF-8" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />  
+    <title>Ứng Dụng Thời Tiết</title>  
+    <style>  
+        body {  
+            background-color: rgb(186, 222, 232); 
+            font-family: Arial, sans-serif;  
+        }  
+        .weather-card {  
+            background-color: white;  
+            border-radius: 10px;  
+            padding: 20px;  
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            flex-direction: column;  
+            margin-top: 20px;  
+        }  
+        .input-group {  
+            margin-bottom: 20px;  
+        }  
+        #cityName {  
+            font-size: 24px;  
+            font-weight: bold;  
+            color: rgb(86, 216, 86); 
+        }  
+        .weather-icon {  
+            width: 100px;  
+            height: 100px;  
+            margin: 10px 0;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container mt-5">  
+        <h1 class="text-center">Ứng Dụng Thời Tiết</h1>  
+        <div class="input-group">  
+            <input type="text" id="cityInput" class="form-control" placeholder="Nhập tên thành phố..." aria-label="Thành phố" />  
+            <div class="input-group-append">  
+                <button id="searchButton" class="btn btn-primary">Tìm kiếm</button>  
+            </div>  
+        </div>  
+        <div id="weatherDisplay" class="weather-card" style="display: none">  
+            <h3 id="cityName"></h3>  
+            <img id="weatherIcon" class="weather-icon" alt="" />  
+            <h4 id="temperature"></h4>  
+            <p id="humidity"></p>  
+            <p id="windSpeed"></p>  
+            <p id="description"></p>  
+        </div>  
+        <div id="errorMsg"></div>  
+    </div>  
+    <script>  
+        let weatherData = {  
+            "Hà Nội": {  
+                temperature: 25,  
+                humidity: 70,  
+                windSpeed: 5,  
+                description: "Có mây",  
+                icon: "https://i.pinimg.com/474x/82/bc/54/82bc54466f5051e3cbffed5295139242.jpg",  
+            },  
+            "Hồ Chí Minh": {  
+                temperature: 32,  
+                humidity: 75,  
+                windSpeed: 7,  
+                description: "Nắng",  
+                icon: "https://i.pinimg.com/474x/18/69/dd/1869dd7fe281674ac337428a6b45fa14.jpg",  
+            },  
+            "Đà Nẵng": {  
+                temperature: 28,  
+                humidity: 82,  
+                windSpeed: 12,  
+                description: "Mưa rào",  
+                icon: "https://i.pinimg.com/474x/f4/24/cf/f424cf51faedaec95b3cc5709234750f.jpg",  
+            },  
+        };  
+        document.getElementById("searchButton").onclick = function () {  
+            let city = document.getElementById("cityInput").value.trim();  
+            let weather = weatherData[city];  
+            if (weather) {  
+                document.getElementById("cityName").innerText = city;  
+                document.getElementById("temperature").innerText = `Nhiệt độ: ${weather.temperature} °C`;  
+                document.getElementById("humidity").innerText = `Độ ẩm: ${weather.humidity}%`;  
+                document.getElementById("windSpeed").innerText = `Tốc độ gió: ${weather.windSpeed} km/h`;  
+                document.getElementById("description").innerText = weather.description;  
+                document.getElementById("weatherIcon").src = weather.icon;  
+
+                document.getElementById("weatherDisplay").style.display = "block";  
+                document.getElementById("errorMsg").innerText = "";  
+            } else {  
+                document.getElementById("errorMsg").innerText = "Không tìm thấy thông tin thời tiết cho thành phố này!";  
+                document.getElementById("weatherDisplay").style.display = "none";  
+            }  
+        };  
+    </script>  
+</body>  
+</html>  
