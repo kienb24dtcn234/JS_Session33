@@ -1,0 +1,42 @@
+<!DOCTYPE html>  
+<html lang="vi">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title></title>  
+</head>  
+<body>  
+    <h1>Chương trình lọc sản phẩm theo danh mục</h1>  
+    <select id="danhMuc">  
+        <option value="">-- Lựa chọn danh mục --</option>  
+        <option value="Đồ ăn">Đồ ăn</option>  
+        <option value="Nước">Nước</option>  
+        <option value="Dụng cụ">Dụng cụ</option>  
+    </select>  
+    <button id="locBtn">Lọc</button>  
+    <ul id="sanPhamList">  
+    </ul>  
+    <script>  
+        let dish = [  
+            { name: 'Rau sạch', category: 'Đồ ăn' },  
+            { name: 'Thịt lợn', category: 'Đồ ăn' },  
+            { name: 'Pepsi không calo', category: 'Nước' },  
+            { name: 'Cocacola', category: 'Nước' },  
+            { name: 'Cờ lê', category: 'Dụng cụ' },  
+            { name: 'Tuy vit', category: 'Dụng cụ' },  
+        ];  
+        document.getElementById('locBtn').onclick = function() {  
+            let danhMuc = document.getElementById('danhMuc').value;  
+            let sanPhamList = document.getElementById('sanPhamList');  
+            sanPhamList.innerHTML = ''; 
+            for (let i = 0; i < dish.length; i++) {  
+                if (dish[i].category === danhMuc || danhMuc === '') {  
+                    let li = document.createElement('li');  
+                    li.textContent = `Tên đồ ăn: ${dish[i].name} - Danh mục: ${dish[i].category}`;  
+                    sanPhamList.appendChild(li);  
+                }  
+            }  
+        };  
+    </script>  
+</body>  
+</html>  
